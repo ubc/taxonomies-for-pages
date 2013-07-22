@@ -18,13 +18,13 @@ Frequently Asked Questions
 Screenshots
 -----------
 
-![screenshot-1](https://raw.github.com/psmagicman/taxonomies-for-pages/master/screenshot-1.png)
+![screenshot-1](https://raw.github.com/ubc/taxonomies-for-pages/master/screenshot-1.png)
 Page editor with the `Categories` and `Tags` metaboxes
 
-![screenshot-2](https://raw.github.com/psmagicman/taxonomies-for-pages/master/screenshot-2.png)
+![screenshot-2](https://raw.github.com/ubc/taxonomies-for-pages/master/screenshot-2.png)
 Category archive page with the categorized page
 
-![screenshot-3](https://raw.github.com/psmagicman/taxonomies-for-pages/master/screenshot-3.png)
+![screenshot-3](https://raw.github.com/ubc/taxonomies-for-pages/master/screenshot-3.png)
 Tag  archives page with the tagged page
 
 Changelog
