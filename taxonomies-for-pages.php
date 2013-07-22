@@ -13,11 +13,11 @@
  *
  * @wordpress-plugin
  * Plugin Name: Taxonomies for Pages
- * Plugin URI:  https://github.com/psmagicman/taxonomies-for-pages
+ * Plugin URI:  https://github.com/ubc/taxonomies-for-pages
  * Description: A WordPress plugin that adds categories and tags to pages.
  * Version:     1.0.0
  * Author:      Julien
- * Author URI:  https://github.com/psmagicman
+ * Author URI:  https://github.com/ubc
  * Text Domain: plugin-name-locale
  * License:     GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -27,21 +27,21 @@
 
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	die( -1 );
 }
 
-define( 'TXP_DIR_PATH', plugin_dir_path( __FILE__ ) );
-define( 'TXP_BASENAME', plugin_basename( __FILE__ ) );
-define( 'TXP_DIR_URL', plugins_url( '', TXP_BASENAME ) );
-define( 'TXP_VIEWS_PATH', TXP_DIR_PATH . 'views/' );
-define( 'TXP_LIB_PATH', TXP_DIR_PATH . 'lib/' );
-define( 'TXP_JS_URL', TXP_DIR_URL . 'js/' );
-define( 'TXP_CSS_URL', TXP_DIR_URL . 'css/' );
+define( 'TAXONOMIES_FOR_PAGES_DIR_PATH', plugin_dir_path( __FILE__ ) );
+define( 'TAXONOMIES_FOR_PAGES_BASENAME', plugin_basename( __FILE__ ) );
+define( 'TAXONOMIES_FOR_PAGES_DIR_URL', plugins_url( '', TAXONOMIES_FOR_PAGES_BASENAME ) );
+define( 'TAXONOMIES_FOR_PAGES_VIEWS_PATH', TAXONOMIES_FOR_PAGES_DIR_PATH . 'views/' );
+define( 'TAXONOMIES_FOR_PAGES_LIB_PATH', TAXONOMIES_FOR_PAGES_DIR_PATH . 'lib/' );
+define( 'TAXONOMIES_FOR_PAGES_JS_URL', TAXONOMIES_FOR_PAGES_DIR_URL . 'js/' );
+define( 'TAXONOMIES_FOR_PAGES_CSS_URL', TAXONOMIES_FOR_PAGES_DIR_URL . 'css/' );
 
-require_once( TXP_LIB_PATH . 'class.txp.php' );
+require_once( TAXONOMIES_FOR_PAGES_LIB_PATH . 'class.taxonomies-for-pages.php' );
 
-register_activation_hook( __FILE__, array( 'TXP', 'activate' ) );
-register_deactivation_hook( __FILE__, array( 'TXP', 'deactivate' ) );
+register_activation_hook( __FILE__, array( 'TAXONOMIES_FOR_PAGES', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'TAXONOMIES_FOR_PAGES', 'deactivate' ) );
 
-TXP::get_instance();
+TAXONOMIES_FOR_PAGES::get_instance();

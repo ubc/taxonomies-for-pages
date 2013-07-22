@@ -1,6 +1,6 @@
 <?php
 
-Class TXP {
+Class TAXONOMIES_FOR_PAGES {
 	
 	protected static $instance = null;
 
