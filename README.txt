@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: psmagicman
 Tags: taxonomies, pages, taxonomies for pages, post tag, category, categories, tags, hierarchy, flat, archive pages, archive
-Requires at least: 3.5.1
+Requires at least: 3.5
 Tested up to: 3.6
-Stable tag: 1.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,12 @@ TBD
 3. Tag archive page with the tagged page.
 
 == Changelog ==
+
+= 2.0.1 =
+* There are no longer duplicate pages/posts in the search page
+
+= 2.0 =
+* Pages with taxonomies now show up in the WordPress search page
 
 = 1.0 =
 * Stable version.
