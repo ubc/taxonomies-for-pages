@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * Taxonomies in search pages found in the "search everything" WordPress plugin
+ */
 Class TAXONOMIES_FOR_PAGES {
 	
 	protected static $instance = null;
