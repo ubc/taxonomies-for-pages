@@ -15,6 +15,7 @@ Class TAXONOMIES_FOR_PAGES {
 		add_filter( 'posts_join', array( &$this, 'search_join' ) );
 		add_filter( 'posts_where', array( &$this, 'search_pages' ) );
 		add_filter( 'posts_search', array( &$this, 'search_where' ), 10, 2 );
+		add_filter( 'posts_request', array( &$this, 'remove_duplicates' ) );
 		//add_filter( 'posts_request', array( &$this, 'print_query'), 10, 2 );
 	}
 
@@ -55,63 +56,6 @@ Class TAXONOMIES_FOR_PAGES {
 				$query->set( 'post_type', array( 'post', 'page' ) );
 			}
 
-	}
-
-	/**
-	 * get_search_default function
-	 * This function searches for terms in the default places like title and content
-	 */
-	function get_search_default() {
-
-		global $wpdb;
-		$n = ( isset( $this->query_instance->query_vars['exact'] ) && $this->query_instance->query_vars['exact'] ) ? '' : '%';
-		$search = '';
-		$separator = '';
-		$terms = self::get_search();
-
-		$search .= '(';
-		foreach( $terms as $term ) {
-			$search .= $separator;
-			$search .= sprintf( 
-				"((%s.post_title LIKE '%s%s%s') OR (%s.post_content LIKE '%s%s%s'))", 
-				$wpdb->posts, 
-				$n, 
-				$term, 
-				$n, 
-				$wpdb->posts, 
-				$n, 
-				$term, 
-				$n 
-			);
-			$separator = ' AND ';
-		}
-		$search .= ')';
-
-		return $search;
-	}
-
-	/**
-	 * get_search function
-	 * This function creates the list of search keywords from the 's' parameters.
-	 */
-	function get_search() {
-		global $wpdb;
-		$s = isset( $this->query_instance->query_vars['s'] ) ? $this->query_instance->query_vars['s'] : '';
-		$sentence = isset( $this->query_instance->query_vars['sentence'] ) ? $this->query_instance->query_vars['sentence'] : false;
-		$search_terms = array();
-
-		if( !empty( $s ) ) {
-			$s = stripslashes_deep( $s );
-			if( $sentence ) {
-				$search_terms = array( $s );
-			}
-			else {
-				preg_match_all( '/".*?("|$)|((?<=[\\s",+])|^)[^\\s",+]+/', $s, $matches );
-				$search_terms = array_map( create_function( '$a', 'return trim( $a, "\\"\'\\n\r ");' ), $matches[0] );
-			}
-		}
-
-		return $search_terms;
 	}
 
 	/**
@@ -181,6 +125,80 @@ Class TAXONOMIES_FOR_PAGES {
 		}
 
 		return $where;
+	}
+
+	/**
+	 * remove_duplicates function
+	 * This function will remove the duplicate posts/pages that show up in the search page
+	 */
+	function remove_duplicates( $query ) {
+		global $wpdb;
+		if( !empty( $this->query_instance->query_vars['s'] ) ) {
+			if( strstr( $query, 'DISTINCT' ) ) {
+				// do nothing if distinct is already in the search params
+			}
+			else {
+				$query = str_replace( 'SELECT', 'SELECT DISTINCT', $query );
+			}
+		}
+		return $query;
+	}
+
+	/**
+	 * get_search_default function
+	 * This function searches for terms in the default places like title and content
+	 */
+	function get_search_default() {
+
+		global $wpdb;
+		$n = ( isset( $this->query_instance->query_vars['exact'] ) && $this->query_instance->query_vars['exact'] ) ? '' : '%';
+		$search = '';
+		$separator = '';
+		$terms = self::get_search();
+
+		$search .= '(';
+		foreach( $terms as $term ) {
+			$search .= $separator;
+			$search .= sprintf( 
+				"((%s.post_title LIKE '%s%s%s') OR (%s.post_content LIKE '%s%s%s'))", 
+				$wpdb->posts, 
+				$n, 
+				$term, 
+				$n, 
+				$wpdb->posts, 
+				$n, 
+				$term, 
+				$n 
+			);
+			$separator = ' AND ';
+		}
+		$search .= ')';
+
+		return $search;
+	}
+
+	/**
+	 * get_search function
+	 * This function creates the list of search keywords from the 's' parameters.
+	 */
+	function get_search() {
+		global $wpdb;
+		$s = isset( $this->query_instance->query_vars['s'] ) ? $this->query_instance->query_vars['s'] : '';
+		$sentence = isset( $this->query_instance->query_vars['sentence'] ) ? $this->query_instance->query_vars['sentence'] : false;
+		$search_terms = array();
+
+		if( !empty( $s ) ) {
+			$s = stripslashes_deep( $s );
+			if( $sentence ) {
+				$search_terms = array( $s );
+			}
+			else {
+				preg_match_all( '/".*?("|$)|((?<=[\\s",+])|^)[^\\s",+]+/', $s, $matches );
+				$search_terms = array_map( create_function( '$a', 'return trim( $a, "\\"\'\\n\r ");' ), $matches[0] );
+			}
+		}
+
+		return $search_terms;
 	}
 
 	function create_search_tags() {
