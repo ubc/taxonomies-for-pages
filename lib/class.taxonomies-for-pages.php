@@ -8,7 +8,6 @@ Class TAXONOMIES_FOR_PAGES {
 	private $query_instance;
 
 	private function __construct() {
-		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 		add_action( 'init', array( __CLASS__, 'register_taxonomies' ) );
 		add_action( 'pre_get_posts', array( __CLASS__, 'archive_tags_and_categories' ) );
