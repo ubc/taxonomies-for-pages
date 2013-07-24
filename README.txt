@@ -32,12 +32,6 @@ TBD
 
 == Changelog ==
 
-= 2.0.1 =
-* There are no longer duplicate pages/posts in the search page
-
-= 2.0 =
-* Pages with taxonomies now show up in the WordPress search page
-
 = 1.0 =
 * Stable version.
 * Added taxonomies to pages

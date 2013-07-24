@@ -30,12 +30,6 @@ Tag  archives page with the tagged page
 Changelog
 ---------
 
-### Version 2.0.1
-* There are no longer duplicate pages/posts in the search page
-
-### Version 2.0
-* Pages with taxonomies now show up in the WordPress search page
-
 ### Version 1.0
 * Stable version
 * Added taxonomies to pages
