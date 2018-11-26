@@ -41,7 +41,7 @@ define( 'TAXONOMIES_FOR_PAGES_CSS_URL', TAXONOMIES_FOR_PAGES_DIR_URL . 'css/' );
 
 require_once( TAXONOMIES_FOR_PAGES_LIB_PATH . 'class.taxonomies-for-pages.php' );
 
-register_activation_hook( __FILE__, array( 'TAXONOMIES_FOR_PAGES', 'activate' ) );
+// register_activation_hook( __FILE__, array( 'TAXONOMIES_FOR_PAGES', 'activate' ) );
 // register_deactivation_hook( __FILE__, array( 'TAXONOMIES_FOR_PAGES', 'deactivate' ) );
 
 TAXONOMIES_FOR_PAGES::get_instance();
